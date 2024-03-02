@@ -1,0 +1,20 @@
+services:
+   nginx:
+     build: ./nginx/
+     ports:
+       - 80:80
+     volumes:
+      - ./js/:/var/www/html/js
+
+   php:
+     build: ./php/
+     expose:
+       - 9000
+     volumes:
+        - ./php/:/var/www/html/
+  
+   composer:
+    image: composer:latest
+    command: composer update && composer install
+    volumes:
+      - ./php:/app
