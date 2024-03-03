@@ -1,12 +1,10 @@
 <?php
-require 'vendor/autoload.php'; // Make sure you've run `composer require sc0vu/web3.php` to install web3.php
+require 'vendor/autoload.php'; // Make sure the composer package `web3p/web3.php` is installed
 use Web3\Web3;
 use Web3\Contract;
 
-// Your Polygon RPC URL
+// RPC URL
 $rpcUrl = 'https://rpc-mumbai.maticvigil.com/';
-
-// Initialize Web3 with the Polygon RPC endpoint
 $web3 = new Web3($rpcUrl);
 
 // Contract ABI and Address
@@ -15,11 +13,9 @@ $contractAddress = '0x08F620DeD366f36535904f1d36C86dcf4D8F60Be';
 
 // Initialize the contract
 $contract = new Contract($web3->provider, $contractABI);
-
-// Set the contract address
 $contract->at($contractAddress);
 
-// Call the contract function
+
 $contract->call('submitted', ['0x915316dd1cfc19b109b695ff7fc4f1ca0f1ba32883f57fd1ecde8eeaf51bf34f', '0xdb050d824de95614730c4dd04b9011bcc9369758b473ee29dbb2302d9c176910'], function ($err, $result) {
     if ($err !== null) {
         // Handle error
